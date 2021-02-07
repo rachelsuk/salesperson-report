@@ -1,8 +1,7 @@
 """Generate sales report showing total melons each salesperson sold."""
 
-# creates empty lists and sets them to variables salespeople and melons_sold
-salespeople = []
-melons_sold = []
+# creates empty dict and sets it to variable salespeople
+salespeople = {}
 
 # opens the txt file
 f = open('sales-report.txt')
@@ -16,23 +15,11 @@ for line in f:
     salesperson = entries[0]
     # retrieves third item of list (total melons sold), converts it to an int object and stores it in variable 'melons'
     melons = int(entries[2])
-    # checks to see if saleperson's name is in the list of salespeople.
-    if salesperson in salespeople:
-        # if name is in the list, find the index of salesperson in the list and store it in variable 'position'
-        position = salespeople.index(salesperson)
-        # add the number of melons the salesperson sold at the same index but for list 'melons_sold'.
-        melons_sold[position] += melons
-    else:
-        # if name is not in the list, add their name to the list
-        salespeople.append(salesperson)
-        # add the number of melons the salesperson sold to the end of the list 'melons_sold'.
-        melons_sold.append(melons)
-
-# loop over each item in the list 'salespeople'
-for i in range(len(salespeople)):
+    # stores salesperson name as dict key and melons sold as dict value
+    salespeople[salesperson] = salespeople.get(salesperson, 0) + melons
+    
+# loop over each item in the dict 'salespeople'
+for salesperson in salespeople:
     # print how many melons each salesperson sold
-    print(f'{salespeople[i]} sold {melons_sold[i]} melons')
+    print(f'{salesperson} sold {salespeople[salesperson]} melons')
 
-# improvements: instead of using multiple lists to store different info for a salesperson,
-# we can use one dictionary where salesperson would be the dict key, and their info would be
-# stored in the dict value.

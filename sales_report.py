@@ -32,3 +32,7 @@ for line in f:
 for i in range(len(salespeople)):
     # print how many melons each salesperson sold
     print(f'{salespeople[i]} sold {melons_sold[i]} melons')
+
+# improvements: instead of using multiple lists to store different info for a salesperson,
+# we can use one dictionary where salesperson would be the dict key, and their info would be
+# stored in the dict value.
